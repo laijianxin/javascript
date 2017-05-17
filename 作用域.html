@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> javscript没有块级作用域</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    function outputNumbers(count) {
+        (function() {
+            for (var i = 0; i < count; i++) {
+                console.log(i);
+            }
+        })();
+    }
+    outputNumbers(4);
+    console.log(i) //会报错
+
+
+    </script>
+</body>
+
+</html>

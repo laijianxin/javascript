@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS中检测数据类型的几种方式及优缺点小结</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			1 typeof 用来检测数据类型的运算符局限性:
+			局限性：1typeof null ->"object"
+					2检测的不管是数组还是正则都返回的是"object",所以typeof不能判断一个值是否为数组
+
+			2、instanceof/constructor 检测某一个对象是否属于某一个类
+				console.log([] instanceof Array);//->true
+				console.log(/^$/ instanceof RegExp);//->true
+				console.log([] instanceof Object);//->true
+				console.log([].constructor === Array);//->true
+				console.log([].constructor === Object);//->false
+				constructor可以避免instanceof检测数组的时候,用Object也是true的问题
+				console.log({}.constructor === Object);//true<br>console.log([].constructor === Object);//false
+
+			局限性：
+				1)用instanceof检测的时候,只要当前的这个类在实例的原型链上(可以通过原型链__proto__找到它),检测出来的结果都是true
+				2)基本数据类型的值是不能用instanceof来检测的 
+					console.log(1 instanceof Number);//->false
+
+		*/
+		
+		
+	</script>
+</body>
+</html>

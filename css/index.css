@@ -1,0 +1,17 @@
+.slider {
+  width: 1200px;
+  margin: 0 auto;
+}
+.slider .list {
+  width: 19999px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+.slider .list a {
+  position: absolute;
+}
+article{
+	background-color: yellow;
+	color: blue;
+}

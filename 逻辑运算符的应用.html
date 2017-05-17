@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>逻辑运算符||和&&的应用</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*	
+		短路原理:
+			1、只要“||”前面为false,不管“||”后面是true还是false，都返回“||”后面的值。
+			2、只要“||”前面为true,不管“||”后面是true还是false，都返回“||”前面的值。
+			在js逻辑运算中，0、""、null、false、undefined、NaN都会判为false
+
+			1、只要“&&”前面是false，无论“&&”后面是true还是false，结果都将返“&&”前面的值;
+			2、只要“&&”前面是true，无论“&&”后面是true还是false，结果都将返“&&”后面的值;
+		*/
+		var a = false&&3;
+		var b = true&&2;
+		alert(a);
+		alert(b);
+
+		var c = false&&3;
+		var d = true&&2;
+		alert(c);
+		alert(d);
+
+		// !!的作用是把一个其他类型的变量转成的boolean类型。
+		console.log(typeof !!5);
+		console.log(typeof 5);
+
+
+	</script>
+</body>
+</html>

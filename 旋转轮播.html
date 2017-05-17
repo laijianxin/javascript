@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D旋转轮播</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .demo {
+            width: 600px;
+            /*margin: 20px auto;*/
+            position: relative;
+        }
+        img {
+            width: 600px;
+        }
+        li {
+            position: absolute;
+        }
+        .left {
+           left: 200px;
+        }
+        .right {
+            right: -400px;
+        }
+        .active{
+            transform:translateZ(40px);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <ul>
+            <li class="active">
+                <a href="">
+                    <img src="img/1.jpg" alt="">
+                </a>
+            </li>
+            <li class="right">
+                <a href="">
+                    <img src="img/2.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img src="img/3.jpg" alt="">
+                </a>
+            </li>
+            <li class="left">
+                <a href="">
+                    <img src="img/4.jpg" alt="">
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

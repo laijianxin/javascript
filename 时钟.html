@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery带日期的指针时钟</title>
+	<link rel="stylesheet" href="css/reset.css">
+   <style type="text/css">
+		ul {
+			width: 530px;
+			height: 530px;
+			background: url(img/clock.png) no-repeat -120px -130px;;
+			margin: 20px auto;
+			position: relative;
+		}
+		#date {
+			width: 30px;
+			height: 20px;
+			position: absolute;
+			top: 336px;
+			right: 96px;
+			font-size: 24px;
+			font-weight: bold;
+		}
+		#seconds {
+			width: 20px;
+			height: 533px;
+			background: url(img/hands.png) 33px -28px;
+			position: absolute;
+			top: 0px;
+			left:250px;
+			z-index: 100;
+		}
+		#hours {
+			width: 20px;
+			height: 530px;
+			background: url(img/hands.png) 0px -28px;
+			position: absolute;
+			top: 0px;
+			left: 256px;
+			z-index: 10;
+		}
+		#minutes {
+			width: 20px;
+			height: 530px;
+			background: url(img/hands.png) 63px -28px;
+			position: absolute;
+			top: 0px;
+			left: 254px;
+		}
+   </style>
+</head>
+<body>
+	<div></div>
+<script src="js/jquery-1.6.2.min.js"></script>
+<script>
+	//将数组转换成字符串join()
+	var clock = [
+		'<ul id="clock">',
+		'<li id="date"></li>',
+		'<li id="seconds"></li>',
+		'<li id="hours"></li>',
+		'<li id="minutes"></li>',
+		'</ul>'].join('');
+	$(clock).fadeIn().appendTo('body');
+
+	(function Clock(){
+              var date = new Date().getDate(),
+			   hours = new Date().getHours(),
+               minutes = new Date().getMinutes();	
+			   seconds = new Date().getSeconds(),
+			   
+              $("#date").html(date); 
+             
+			 var hrotate = hours * 30 + (minutes / 2);
+                  
+              $("#hours").css({
+				  'transform'	:  'rotate('+ hrotate +'deg)',
+				'-moz-transform'	:'rotate('+ hrotate +'deg)',
+				'-webkit-transform'	:'rotate('+ hrotate +'deg)'
+				  });
+				  
+			  var mrotate = minutes * 6;
+                        
+              $("#minutes").css({
+				'transform'	:  'rotate('+ mrotate +'deg)',
+				'-moz-transform'	:'rotate('+ mrotate +'deg)',
+				'-webkit-transform'	:'rotate('+ mrotate +'deg)'
+				  });  
+				  
+              var srotate = seconds * 6;
+              
+              $("#seconds").css({
+				 'transform'	:  'rotate('+ srotate +'deg)',
+				'-moz-transform'	:'rotate('+ srotate +'deg)',
+				'-webkit-transform'	:'rotate('+ srotate +'deg)'
+				  });
+             
+             //a call to the clock function after every 1000 miliseconds
+			  setTimeout(Clock,1000);
+		})();
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script type="text/javascript" src="js/mysouces.js"></script>
+	<style type="text/css">
+		ul {
+			width: 300px;
+			height: 300px;
+			background-color: red;
+		}
+		li {
+			width: 150px;
+			height: 150px;
+			background-color: yellow;
+		}
+		a{
+			display: block;
+			width: 50px;
+			height: 50px;
+			background-color: blue;
+		}
+	</style>
+</head>
+
+<body id="body">
+	<a href="#" id="zb">abc</a>
+    <ul id="ul">
+        <li id="li">
+            <a href="http://www.baidu.com" id="a">链接</a>
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+		function gid(id){
+			return document.getElementById(id);
+		}
+		function foo(event){
+			event=event||window.event; //事件兼容
+			var x = event.clientX;
+			var y = event.clientY;
+			alert("X 坐标: " + x + ", Y 坐标: " + y)
+		}
+		gid('zb').onclick = foo;
+	</script>
+
+    <script type="text/javascript">
+		var ul = document.getElementById("ul");
+		var li = document.getElementById("li");
+		var a = document.getElementById("a");
+		var body = document.getElementById("body");
+		
+		li.onclick = function(e) { 
+			alert(3);
+			stopDefault(e);
+		}
+		ul.onclick = function(e) {
+			//停止冒泡event.stopPropagation();
+			stopBubble(e);
+		    alert(2);
+		    //阻止默认行为 => enent.preventDefault();
+		   // return false;
+		}
+		body.onclick = function() {
+			alert(1);
+		}
+	</script>
+
+	
+</body>
+
+</html>

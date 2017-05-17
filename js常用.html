@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+div {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+}
+</style>
+
+<body>
+    <div id="myBtn">123</div>
+    X:
+    <input id="xxx" type="text" /> Y:
+    <input id="yyy" type="text" />
+    <script type="text/javascript">
+    //跨浏览器获取滚动条位置，sp == scroll position
+    function getSP() {
+        return {
+            top: document.documentElement.scrollTop || document.body.scrollTop,
+            left: document.documentElement.scrollLeft || document.body.scrollLeft
+        }
+    }
+    console.log(getSP());
+
+    //跨浏览器添加事件
+    function addEvent(obj, type, fn) {
+        if (obj.addEventListener) {
+            obj.addEventListener(type, fn, false);
+        } else if (obj.attachEvent) { //IE
+            obj.attchEvent('on' + type, fn);
+        }
+    }
+
+    //跨浏览器移除事件
+    function removeEvent(obj, type, fn) {
+        if (obj.removeEventListener) {
+            obj.removeEventListener(type, fn, false);
+        } else if (obj.detachEvent) { //兼容IE
+            obj.detachEvent('on' + type, fn);
+        }
+    }
+
+    //跨浏览器阻止默认行为
+    function preDef(ev) {
+        var e = ev || window.event;
+        if (e.preventDefault) {
+            e.preventDefault();
+        } else {
+            e.returnValue = false;
+        }
+    }
+
+    //跨浏览器获取目标对象
+    function getTarget(ev) {
+        if (ev.target) { //w3c
+            return ev.target;
+        } else if (window.event.srcElement) { //IE
+            return window.event.srcElement;
+        }
+    }
+
+    //跨浏览器获取可视窗口大小
+    function getWindow() {
+        if (typeof window.innerWidth != 'undefined') {
+            return {
+                width: window.innerWidth,
+                height: window.innerHeight
+            }
+        } else {
+            return {
+                width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight
+            }
+        }
+    }
+    console.log(getWindow());
+
+    //对象冒充
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.say = function() {
+            return "name : " + this.name + " age: " + this.age;
+        };
+    }
+    var o = new Object(); //可以简化为Object()
+    Person.call(o, "zhangsan", 20);
+    console.log(o.say()); //name : zhangsan age: 20
+
+    //异步加载也叫非阻塞模式加载，浏览器在下载js的同时，同时还会执行后续的页面处理。
+    //在script标签内，用js创建一个script元素并插入到document中，这种就是异步加载js文件了：
+    (function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://yourdomain.com/script.js';
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    })();
+
+    /*获取屏幕坐标*/
+    function mousePosition(ev) {
+        if (ev.pageX || ev.pageY) {
+            return {
+                x: ev.pageX,
+                y: ev.pageY
+            };
+        }
+        return {
+            x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+            y: ev.clientY + document.body.scrollTop - document.body.clientTop
+        };
+    }
+
+    function mouseMove(ev) {
+        ev = ev || window.event;
+        var mousePos = mousePosition(ev);
+        document.getElementById('xxx').value = mousePos.x;
+        document.getElementById('yyy').value = mousePos.y;
+    }
+    document.onmousemove = mouseMove;
+    /*获取屏幕坐标*/
+
+    //事件分为三个阶段：   事件捕获 -->  事件目标 -->  事件冒泡
+    //添加事件监听addEventListener
+    //使用DOM2级方法添加事件处理程序的主要好处是可以添加多个事件处理程序
+    var btn = document.getElementById("myBtn");
+    var body = document.body;
+    btn.addEventListener("click", function() {
+        alert(this.id);
+    }, false);
+    body.addEventListener("click", function() {
+        alert("hello");
+    }, false);
+    btn.addEventListener("click", function() {
+        alert("Hello World");
+    }, false);
+
+    btn.attachEvent("click", function() {
+        alert("Hello attachEvent");
+    }, true);
+
+    //通过addEventListener()添加的事件处理程序只能使用removeEventListener()来移除；移除时传入的参数与添加处理程序时使用的参数相同。这也意味着通过addEventListener()添加的匿名函数无法移除
+    btn.addEventListener("click", function() {
+        alert(this.id);
+    }, false);
+    btn.removeEventListener("click", function() { //无效！
+        alert(this.id);
+    }, false);
+
+    //E8和IE8以下的版本不支持addEventListener()，而是采用attachEvent()来实现事件绑定。目前只有IE和Opera支持attachEvent()。IE9支持addEventListener()，同时也兼容IE8的attachEvent()方法，但是IE9和IE8对attachEvent()的实现有点不同。
+    //IE9和IE10先输出“1”，再输出“2”，而IE8和IE7先输出“2”，再输出“1”。
+    var div = document.getElementById("myBtn");
+        div.attachEvent("onclick", function(event) {
+            alert("1");
+        });
+        div.attachEvent("onclick", function(event) {
+            alert("2");
+        });
+    
+    //删除IE事件处理程序，采用detachEvent()，删除时传入的参数必须和绑定时传入的参数相同，不能传入匿名函数
+    var div = document.getElementById("myBtn");
+        var handler = function(event) {
+            alert("delete");
+        };
+        div.attachEvent("onclick",handler);
+        div.detachEvent("onclick",handler);
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var arr1 = ["你","好","吗"];
+		var arr2 = ["好","吗","你","的",'123'];
+		var arr3 = [];
+		var arr4 = [];
+		for (var i = 0; i < arr2.length; i++) {
+			for (var k = 0; k < arr1.length; k++) {
+				if ((arr2.indexOf(arr1[i]))>=0) {
+					arr3.push(arr2[i]);
+				break;
+				}else{
+					arr4.push(arr2[i]);
+					break;
+				}
+				
+			}
+		}
+		console.log(arr3);
+		// console.log(arr4);
+		arr3 = arr3.concat(arr4);
+		console.log(arr3);
+
+
+	</script>
+</body>
+</html>
